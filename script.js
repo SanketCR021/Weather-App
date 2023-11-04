@@ -1,4 +1,4 @@
-alert("Chal gai bhai");
+// alert("Chal gai bhai");
 
 // const url = 'https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=Bhopal';
 const options = {
@@ -51,7 +51,8 @@ async function getWeather(city) {
     }
 }
 
-submitt.addEventListener('click', () => {
+submitt.addEventListener('click', (event) => {
+    event.preventDefault();   // ye page ko reload hone se rokega
     getWeather(inputt.value)  // ye input ki value ko getWeather function me pass karega    
 })
 // getWeather('london');
