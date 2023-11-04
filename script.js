@@ -56,3 +56,46 @@ submitt.addEventListener('click', (event) => {
     getWeather(inputt.value)  // ye input ki value ko getWeather function me pass karega    
 })
 // getWeather('london');
+
+async function getWeather2(city) {
+    try {
+        const response = await fetch('https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city='+city, options);
+
+        
+
+            const result = await response.json();
+            // console.log(result);
+            // console.log(result.humidity);
+            
+            return result;  // ye return karega result ko 
+            
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+async function generator(city){
+   
+        let newCity = await getWeather2(city);
+        
+        // console.log(newCity);
+
+        let cityTds = document.querySelectorAll('.'+city+'City' + ' td'); 
+        // console.log(cityTds);
+        cityTds[0].textContent = newCity.temp + ' °C'; // Replace 'temp' with the actual property name
+        cityTds[1].textContent = newCity.feels_like + ' °C';
+        cityTds[2].textContent = newCity.max_temp + ' °C';
+        cityTds[3].textContent = newCity.min_temp  + ' °C';
+        cityTds[4].textContent = newCity.humidity + ' %';
+        cityTds[5].textContent = newCity.wind_speed + ' Km/Hr';
+
+    // we can use IIFE to make the code more efficient and faster loading
+}
+
+generator('london');
+generator('nagpur');
+generator('mumbai');
+generator('tokyo');
+generator('gotham');
+
